@@ -1,13 +1,11 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
+import type { ReactNode } from "react";
 
-export default function ProtectedRoute({ children }: { children: JSX.Element }) {
+export default function ProtectedRoute({ children }: { children: ReactNode }) {
   const { accessToken } = useAuth();
 
-  // token bo‘lmasa -> login sahifaga qaytariladi
-  if (!accessToken) {
-    return <Navigate to="/" replace />;
-  }
+  if (!accessToken) return <Navigate to="/" replace />;
 
-  return children;
+  return <>{children}</>;
 }
